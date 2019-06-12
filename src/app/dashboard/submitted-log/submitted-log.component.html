@@ -1,0 +1,66 @@
+<!--<p-card>-->
+<!--  <div *ngFor="let log of logDetails">-->
+<!--    <div class="panel-container">-->
+<!--      <p-panel>-->
+<!--        <p-header>-->
+<!--          <span>{{log.title}}</span>-->
+<!--          <button pButton label="Delete" class="ui-button-raised ui-button-danger" (click)="remove(log)"></button>-->
+<!--        </p-header>-->
+<!--        <span>{{log.message}}</span>-->
+<!--      </p-panel>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</p-card>-->
+<p-toast></p-toast>
+<p-dataView #dv [value]="logDetails" [paginator]="true" [rows]="20" paginatorPosition="both" filterBy="title"
+  [sortField]="sortField" [sortOrder]="sortOrder" >
+  <p-header>
+    <div class="ui-helper-clearfix">
+      <div class="ui-g">
+        <div class="ui-g-12 ui-md-4">
+<!--          <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By" (onChange)="onSortChange($event)" [style]="{'min-width':'140px'}"></p-dropdown>-->
+        </div>
+        <div class="ui-g-6 ui-md-4 filter-container">
+          <div style="position:relative">
+            <label>
+              <input type="search" pInputText placeholder="Search by title" (keyup)="dv.filter($event.target.value)">
+            </label>
+          </div>
+        </div>
+        <div class="ui-g-6 ui-md-4" style="text-align:right">
+          <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+        </div>
+      </div>
+    </div>
+  </p-header>
+  <ng-template let-log pTemplate="listItem">
+    <div class="row" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
+        <div class="col-md-10">
+          <div class="col-md-12 text-title">
+            {{log.title}}
+          </div>
+          <div class="col-md-12 text-message">
+            <div>{{log.message}}</div>
+          </div>
+          <div class="col-md-12 text-time-stamp">
+            <div><b>Last Updated:</b> {{myDate | amLocal | amDateFormat: 'YYYY-MM-DD HH:mm'}}</div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="text-right">
+            <button pButton label="Delete" class="ui-button-raised ui-button-danger" (click)="remove(log)"></button>
+          </div>
+        </div>
+      </div>
+  </ng-template>
+  <ng-template let-log pTemplate="gridItem">
+    <div style="padding:.5em" class="ui-g-12 ui-md-3">
+      <p-panel [header]="log.title" [style]="{'text-align':'center'}">
+        <div class="">{{log.message}} - </div>
+        <div class=""><b>Last Updated:</b> {{myDate | amLocal | amDateFormat: 'YYYY-MM-DD HH:mm'}}</div>
+        <hr class="ui-widget-content" style="border-top:0">
+        <button pButton label="Delete" class="ui-button-raised ui-button-danger" (click)="remove(log)"></button>
+      </p-panel>
+    </div>
+  </ng-template>
+</p-dataView>

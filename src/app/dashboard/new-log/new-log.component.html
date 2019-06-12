@@ -1,0 +1,27 @@
+<p-toast></p-toast>
+<div class="new-log">
+  <p-card header="Add new Log">
+    <p-header>
+      <img src="data" src="./../../../assets/images/data.jpg">
+    </p-header>
+    <form [formGroup]="logForm" (ngSubmit)="onSubmit()">
+      <div class="log-input">
+        <span class="ui-float-label">
+          <input formControlName="title" id="float-input" class="" type="text" pInputText>
+          <label for="float-input">Log Title</label>
+        </span>
+      </div>
+      <div class="log-textarea">
+        <span class="ui-float-label">
+          <textarea formControlName="message" cols="30" id="float-input-text" pinputtextarea="" rows="5" class="ui-inputtext ui-corner-all ui-state-default ui-widget"></textarea>
+          <label for="float-input-text">Log Message</label>
+        </span>
+      </div>
+      <button pButton label="Submit Log" class="ui-button-raised" type="submit" [disabled]="!logForm.valid"></button>
+    </form>
+  </p-card>
+</div>
+
+<div class="submitted-log">
+  <app-submitted-log [logDetails]="logs"></app-submitted-log>
+</div>
